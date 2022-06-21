@@ -17,8 +17,7 @@ dependencies {
         <groupId>com.intellectualsites.informative-annotations</groupId>
         <artifactId>informative-annotations</artifactId>
         <version>VERSION</version>
-        <scope>import</scope>
-        <type>pom</type>
+        <scope>provided</scope>
     </dependency>
 </dependencies>
 ```
