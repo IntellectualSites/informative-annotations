@@ -2,6 +2,7 @@ import java.net.URI
 
 plugins {
     java
+    `java-library`
     `maven-publish`
     signing
 
@@ -16,7 +17,7 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
-version = "1.1-SNAPSHOT"
+version = "1.1"
 group = "com.intellectualsites.informative-annotations"
 
 repositories {
@@ -69,6 +70,7 @@ signing {
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            from(components["java"])
             pom {
                 name.set(project.name + " " + project.version)
                 description.set("An informative annotation library.")
