@@ -45,7 +45,7 @@ public final class ApiDescription {
     @Documented
     @Retention(RetentionPolicy.CLASS)
     @Target(value = {METHOD, PACKAGE, MODULE, RECORD_COMPONENT, TYPE})
-    public @interface Ancillary {
+    public @interface Extra {
         /**
          * Returns additional information about API.
          *
