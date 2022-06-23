@@ -1,5 +1,13 @@
 {
   "extends": [
-    "config:base"
-  ]
+    "config:base",
+    ":disableDependencyDashboard"
+  ],
+  "timezone": "Europe/Berlin",
+  "schedule": [
+    "every monday"
+  ],
+  "labels": ["dependencies"],
+  "commitMessagePrefix": "build: ",
+  "rebaseWhen": "conflicted"
 }
