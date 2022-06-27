@@ -35,7 +35,7 @@ import static java.lang.annotation.ElementType.RECORD_COMPONENT;
 import static java.lang.annotation.ElementType.TYPE;
 
 /**
- * @since TODO
+ * @since 1.0
  */
 public final class ApiDescription {
 
@@ -50,7 +50,7 @@ public final class ApiDescription {
          * Returns additional information about API.
          *
          * @return the version string
-         * @since TODO
+         * @since 1.0
          */
         String info() default "";
 
@@ -58,7 +58,7 @@ public final class ApiDescription {
          * Express precaution about the use of this API.
          *
          * @return the version string
-         * @since TODO
+         * @since 1.0
          */
         String warning() default "";
     }

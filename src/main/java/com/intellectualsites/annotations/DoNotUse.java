@@ -24,10 +24,16 @@
 package com.intellectualsites.annotations;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.RECORD_COMPONENT;
+import static java.lang.annotation.ElementType.TYPE;
 
 /**
  * This type, field or method should never be referenced by third party consumers under any circumstances.
@@ -35,10 +41,10 @@ import java.lang.annotation.Target;
  *
  * This is a higher lever annotation of {@link NotPublic}.
  *
- * @since TODO
+ * @since 1.0
  */
 @Retention(RetentionPolicy.CLASS)
-@Target({ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+@Target({ANNOTATION_TYPE, CONSTRUCTOR, FIELD, METHOD, RECORD_COMPONENT, TYPE})
 @Documented
 public @interface DoNotUse {
 }

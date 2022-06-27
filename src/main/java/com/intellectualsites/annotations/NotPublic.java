@@ -24,20 +24,26 @@
 package com.intellectualsites.annotations;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.RECORD_COMPONENT;
+import static java.lang.annotation.ElementType.TYPE;
 
 /**
  * Indicates that a public method is not intended for external use by third party consumers.
  * This field should be treated as "not public" and should not be used unless you know what you're doing.
  * It's not part of the API and may change at any time without notice.
  *
- * @since TODO
+ * @since 1.0
  */
 @Retention(RetentionPolicy.CLASS)
-@Target({ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+@Target({ANNOTATION_TYPE, CONSTRUCTOR, FIELD, METHOD, RECORD_COMPONENT, TYPE})
 @Documented
 public @interface NotPublic {
 }
