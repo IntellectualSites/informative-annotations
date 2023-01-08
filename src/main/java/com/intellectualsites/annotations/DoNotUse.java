@@ -38,7 +38,7 @@ import static java.lang.annotation.ElementType.TYPE;
 /**
  * This type, field or method should never be referenced by third party consumers under any circumstances.
  * It's not part of the API and may change at any time without notice.
- *
+ * <p>
  * This is a higher lever annotation of {@link NotPublic}.
  *
  * @since 1.0

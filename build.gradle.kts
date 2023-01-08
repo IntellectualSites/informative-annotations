@@ -1,4 +1,5 @@
 import java.net.URI
+import com.diffplug.gradle.spotless.SpotlessPlugin
 
 plugins {
     java
@@ -6,7 +7,7 @@ plugins {
     `maven-publish`
     signing
 
-    id("org.cadixdev.licenser") version "0.6.1"
+    id("com.diffplug.spotless") version "6.12.1"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 
     idea
@@ -24,10 +25,11 @@ repositories {
     mavenCentral()
 }
 
-configure<org.cadixdev.gradle.licenser.LicenseExtension> {
-    header(rootProject.file("LICENSE"))
-    include("**/*.java")
-    newLine.set(false)
+spotless {
+    java {
+        licenseHeaderFile(rootProject.file("LICENSE"))
+        target("**/*.java")
+    }
 }
 
 tasks {
