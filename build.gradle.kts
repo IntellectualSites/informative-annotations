@@ -18,7 +18,7 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
-version = "1.5"
+version = "1.6-SNAPSHOT"
 group = "com.intellectualsites.informative-annotations"
 
 repositories {
