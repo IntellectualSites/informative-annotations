@@ -1,14 +1,14 @@
 import java.net.URI
 import com.diffplug.gradle.spotless.SpotlessPlugin
+import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     java
     `java-library`
-    `maven-publish`
     signing
 
     id("com.diffplug.spotless") version "7.0.2"
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    id("com.vanniktech.maven.publish") version "0.31.0"
 
     idea
     eclipse
@@ -34,23 +34,8 @@ spotless {
 
 tasks {
 
-    compileJava {
-        options.compilerArgs.addAll(arrayOf("-Xmaxerrs", "1000"))
-        options.compilerArgs.add("-Xlint:all")
-        for (disabledLint in arrayOf("processing", "path", "fallthrough", "serial"))
-            options.compilerArgs.add("-Xlint:$disabledLint")
-        options.isDeprecation = true
-        options.encoding = "UTF-8"
-    }
-
     javadoc {
         val opt = options as StandardJavadocDocletOptions
-        opt.addStringOption("Xdoclint:none", "-quiet")
-        opt.tags(
-            "apiNote:a:API Note:",
-            "implSpec:a:Implementation Requirements:",
-            "implNote:a:Implementation Note:"
-        )
         opt.noTimestamp()
     }
 
@@ -58,11 +43,6 @@ tasks {
         isPreserveFileTimestamps = false
         isReproducibleFileOrder = true
     }
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
 }
 
 signing {
@@ -75,54 +55,49 @@ signing {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            pom {
-                name.set(project.name + " " + project.version)
-                description.set("An informative annotation library.")
-                url.set("https://github.com/IntellectualSites/informative-annotations")
+mavenPublishing {
 
-                licenses {
-                    license {
-                        name.set("The MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                        distribution.set("repo")
-                    }
-                }
+    coordinates(
+        groupId = "$group",
+        artifactId = project.name,
+        version = "${project.version}",
+    )
 
-                developers {
-                    developer {
-                        id.set("NotMyFault")
-                        name.set("Alexander Brandes")
-                        organization.set("IntellectualSites")
-                        organizationUrl.set("https://github.com/IntellectualSites/")
-                        email.set("contact(at)notmyfault.dev")
-                    }
-                }
+    pom {
+        name.set(project.name)
+        description.set("An informative annotation library.")
+        url.set("https://github.com/IntellectualSites/informative-annotations")
 
-                scm {
-                    url.set("https://github.com/IntellectualSites/informative-annotations")
-                    connection.set("scm:git:https://github.com/IntellectualSites/informative-annotations.git")
-                    developerConnection.set("scm:git:git@github.com:IntellectualSites/informative-annotations.git")
-                    tag.set("${project.version}")
-                }
-
-                issueManagement {
-                    system.set("GitHub")
-                    url.set("https://github.com/IntellectualSites/informative-annotations/issues")
-                }
+        licenses {
+            license {
+                name.set("The MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("repo")
             }
         }
-    }
-}
 
-nexusPublishing {
-    this.repositories {
-        sonatype {
-            nexusUrl.set(URI.create("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(URI.create("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        developers {
+            developer {
+                id.set("NotMyFault")
+                name.set("Alexander Brandes")
+                organization.set("IntellectualSites")
+                organizationUrl.set("https://github.com/IntellectualSites/")
+                email.set("contact(at)notmyfault.dev")
+            }
         }
+
+        scm {
+            url.set("https://github.com/IntellectualSites/informative-annotations")
+            connection.set("scm:git:https://github.com/IntellectualSites/informative-annotations.git")
+            developerConnection.set("scm:git:git@github.com:IntellectualSites/informative-annotations.git")
+            tag.set("${project.version}")
+        }
+
+        issueManagement {
+            system.set("GitHub")
+            url.set("https://github.com/IntellectualSites/informative-annotations/issues")
+        }
+
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     }
 }
