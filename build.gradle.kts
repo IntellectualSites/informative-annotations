@@ -8,7 +8,7 @@ plugins {
     signing
 
     id("com.diffplug.spotless") version "7.0.4"
-    id("com.vanniktech.maven.publish") version "0.31.0"
+    id("com.vanniktech.maven.publish") version "0.33.0"
 
     idea
     eclipse
